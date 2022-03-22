@@ -75,5 +75,30 @@ namespace WebAPI.Model
             }
             return list;
         }
+        public KelasItem AddKelas(KelasItem ki)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("Insert into kelas (kelas, jurusan, sub) values (@kelas, @jurusan, @sub)", conn);
+                cmd.Parameters.AddWithValue("@kelas", ki.kelas);
+                cmd.Parameters.AddWithValue("@jurusan", ki.jurusan);
+                cmd.Parameters.AddWithValue("@sub", ki.sub);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //list.Add(new KelasItem()
+                        //{
+                          //  id = reader.GetInt32("id_kelas"),
+                          //  kelas = reader.GetString("kelas"),
+                          //  sub = reader.GetInt32("sub"),
+                          //  jurusan = reader.GetString("jurusan")
+                       // });
+                   // }
+               // }
+            }
+            return ki;
+        }
     }
 }
